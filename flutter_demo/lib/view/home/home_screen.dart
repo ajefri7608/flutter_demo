@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_demo/bloc/cubit/counter_cubit.dart';
 import 'package:flutter_demo/view/login/login_screen.dart';
 
 class ScreenArguments {
@@ -19,14 +21,19 @@ class HomeScreen extends StatelessWidget {
         title: const Text('Home'),
       ),
       body: Center(
-        child: ElevatedButton(
-          child: Text(args?.message ?? 'First1 Route'),
-          onPressed: () async {
-            final userName = await Navigator.pushNamed(context, '/login');
-            print('The values are: $userName');
-          },
-        ),
-      ),
+          child: Column(
+        children: [
+          BlocBuilder<CounterCubit, int>(
+            builder: (context, state) {
+              return Text('$state');
+            },
+          ),
+          ElevatedButton(
+            child: Text(args?.message ?? 'First1222 Route'),
+            onPressed: () => {context.read<CounterCubit>().increment()},
+          ),
+        ],
+      )),
     );
   }
 }
