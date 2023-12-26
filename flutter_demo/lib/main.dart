@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_demo/view/home/home_screen.dart';
+import 'package:flutter_demo/view/login/login_screen.dart';
+import 'package:flutter_demo/view/search/search_screen.dart';
+
 void main() {
-  runApp(const MainApp());
+  runApp( MaterialApp(
+
+    home: const HomeScreen(), // becomes the route named '/'
+    routes: <String, WidgetBuilder> {
+      '/home': (BuildContext context) => const HomeScreen(),
+      '/login': (BuildContext context) => const LoginScreen(),
+      '/search': (BuildContext context) => const SearchScreen(),
+
+    },
+  ));
 }
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
-    );
-  }
-}
+
