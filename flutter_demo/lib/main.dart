@@ -7,7 +7,15 @@ import 'package:flutter_demo/view/login/login_screen.dart';
 import 'package:flutter_demo/view/search/search_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-void main() {
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   Bloc.observer = const CounterObserver();
   runApp(MultiBlocProvider(
       providers: [
