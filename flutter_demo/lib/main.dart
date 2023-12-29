@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_demo/bloc/counter_observer.dart';
+import 'package:flutter_demo/bloc/simple_bloc_observer.dart';
 import 'package:flutter_demo/bloc/cubit/counter_cubit.dart';
 
 import 'package:flutter_demo/view/home/home_screen.dart';
@@ -16,7 +16,7 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  Bloc.observer = const CounterObserver();
+  Bloc.observer = const SimpleBlocObserver();
   runApp(MultiBlocProvider(
       providers: [
         BlocProvider(
