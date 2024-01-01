@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_demo/model/products.dart';
 
-final db = FirebaseFirestore.instance;
+final productsRef = FirebaseFirestore.instance;
 
 const fakeData = <String, dynamic>{
   "data": [
@@ -149,8 +150,25 @@ const fakeData = <String, dynamic>{
   ]
 };
 
-void addFakeProductData() {
-  // Add a new document with a generated ID
-  db.collection("Products").add(fakeData).then((DocumentReference doc) =>
-      print('DocumentSnapshot added with ID: ${doc.id}'));
+Future<void> addFakeProductData() {
+  // Call the user's CollectionReference to add a new user
+  return productsRef
+      .collection("Products")
+      .doc('Car Products')
+      .set(fakeData)
+      .then((value) => print("Products Added"))
+      .catchError((error) => print("Failed to add Products: $error"));
+}
+
+Future<void> loadFakeProductData() async {
+  Products products = await productsRef
+      .collection("Products")
+      .doc('Car Products')
+      .withConverter(
+          fromFirestore: (snapshot, _) => Products.fromJson(snapshot.data()!),
+          toFirestore: (product, _) => product.toJson())
+      .get()
+      .then((snapshot) => snapshot.data()!);
+  print('aaaaa');
+  print(products);
 }

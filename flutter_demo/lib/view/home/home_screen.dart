@@ -36,7 +36,7 @@ class HomeScreen extends StatelessWidget {
           ),
           ElevatedButton(
             child: const Text('firestore send data'),
-            onPressed: () => {addFakeProductData()},
+            onPressed: () => {loadFakeProductData()},
           ),
         ],
       )),
