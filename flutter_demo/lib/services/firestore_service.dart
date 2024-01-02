@@ -160,8 +160,8 @@ Future<void> addFakeProductData() {
       .catchError((error) => print("Failed to add Products: $error"));
 }
 
-Future<void> loadFakeProductData() async {
-  Products products = await productsRef
+Future<Products> loadFakeProductData() async {
+  return await productsRef
       .collection("Products")
       .doc('Car Products')
       .withConverter(
@@ -169,6 +169,4 @@ Future<void> loadFakeProductData() async {
           toFirestore: (product, _) => product.toJson())
       .get()
       .then((snapshot) => snapshot.data()!);
-  print('aaaaa');
-  print(products);
 }
